@@ -1,3 +1,4 @@
+import { ProductsState } from './state-managments/ngxs/product.state';
 import { ProductsEffects } from './state-managments/ngrx/effects/product.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,12 @@ import { reducers } from './state-managments/ngrx/reducers';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
+
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,10 +27,15 @@ import { HttpClientModule } from '@angular/common/http';
 
     StoreModule.forRoot(reducers, { runtimeChecks: {} }),
     EffectsModule.forRoot([ProductsEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25, // Retains last 25 states
+    //   logOnly: environment.production, // Restrict extension to log-only mode
+    // }),
+
+
+  NgxsModule.forRoot([ProductsState]),
+  NgxsLoggerPluginModule.forRoot(),
+  !environment.production ? NgxsReduxDevtoolsPluginModule.forRoot() : [],
 
   ],
   providers: [],

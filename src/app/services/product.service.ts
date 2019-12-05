@@ -21,8 +21,6 @@ export class ProductsService {
   ) {}
 
   public getProducts(params: Partial<any>): Observable<IProduct[]> {
-    console.log(123123);
-
     // const httpParams: HttpParams = new HttpParams({
     //   fromObject: {
     //     _page: String(params.pageIndex),
