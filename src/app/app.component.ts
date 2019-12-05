@@ -15,15 +15,15 @@ export class AppComponent implements OnInit {
   isLoading$: Observable<boolean>;
 
   public constructor(
-    private stote: Store<any>
+    private store: Store<any>
   ) {
 
   }
 
   ngOnInit() {
-    this.isLoading$ = this.stote.select('products', 'isLoading');
-    this.products$ = this.stote.select('products', 'data');
+    this.isLoading$ = this.store.select('products', 'isLoading');
+    this.products$ = this.store.select('products', 'data');
 
-    this.stote.dispatch(loadProducts());
+    this.store.dispatch(loadProducts());
   }
 }

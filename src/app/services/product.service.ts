@@ -21,8 +21,6 @@ export class ProductsService {
   ) {}
 
   public getProducts(params: Partial<any>): Observable<IProduct[]> {
-    console.log(123123);
-
     // const httpParams: HttpParams = new HttpParams({
     //   fromObject: {
     //     _page: String(params.pageIndex),
@@ -40,7 +38,7 @@ export class ProductsService {
     // API request
     return of(this.products).pipe(
       tap(() => console.log('product request')),
-      delay(3000)
+      delay(2000)
     );
   }
 
