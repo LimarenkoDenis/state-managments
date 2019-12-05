@@ -1,7 +1,6 @@
+import { ExampleFeatureFacade } from './fasade/fasade.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { loadProducts } from './state-managments/ngrx/actions/product.actions';
 import { IProduct } from './interfaces/product.interface';
 
 @Component({
@@ -15,15 +14,15 @@ export class AppComponent implements OnInit {
   isLoading$: Observable<boolean>;
 
   public constructor(
-    private stote: Store<any>
+    private exampleFeatureFacade: ExampleFeatureFacade
   ) {
 
   }
 
   ngOnInit() {
-    this.isLoading$ = this.stote.select('products', 'isLoading');
-    this.products$ = this.stote.select('products', 'data');
+    this.exampleFeatureFacade.loadProducts();
 
-    this.stote.dispatch(loadProducts());
+    this.isLoading$ = this.exampleFeatureFacade.isLoading$;
+    this.products$ = this.exampleFeatureFacade.products$;
   }
 }
