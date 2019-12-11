@@ -16,6 +16,8 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
     // }),
 
 
-  NgxsModule.forRoot([ProductsState]),
-  NgxsLoggerPluginModule.forRoot(),
-  !environment.production ? NgxsReduxDevtoolsPluginModule.forRoot() : [],
+  // NgxsModule.forRoot([ProductsState]),
+  // NgxsLoggerPluginModule.forRoot(),
+  // !environment.production ? NgxsReduxDevtoolsPluginModule.forRoot() : [],
 
+
+    !environment.production ? AkitaNgDevtools.forRoot() : [],
   ],
   providers: [],
   bootstrap: [AppComponent]

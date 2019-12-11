@@ -1,3 +1,5 @@
+import { ProductsAkitaService } from './../state-managments/akita/products.service';
+import { ProductsQuery } from './../state-managments/akita/products.query';
 import { NgxsLoadProducts } from './../state-managments/ngxs/products.actions';
 import { IProduct } from './../interfaces/product.interface';
 import { Injectable } from '@angular/core';
@@ -24,16 +26,29 @@ export class ExampleFeatureFacade {
 
 
   // NGXS
-  constructor(private store: Store) {}
+  // constructor(private store: Store) {}
 
-  @Select(ProductsState.products)
-  public products$: Observable<IProduct[]>;
+  // @Select(ProductsState.products)
+  // public products$: Observable<IProduct[]>;
 
-  @Select(ProductsState.isLoading)
-  public isLoading$: Observable<boolean>;
+  // @Select(ProductsState.isLoading)
+  // public isLoading$: Observable<boolean>;
+
+  // loadProducts(): void {
+  //   this.store.dispatch(new NgxsLoadProducts());
+  // }
+
+
+  // AKITA
+  constructor(
+    private productsAkitaService: ProductsAkitaService,
+    private productsQuery: ProductsQuery
+  ) {}
+
+  public products$ = this.productsQuery.selectAll();
+  public isLoading$ = this.productsQuery.selectLoading();
 
   loadProducts(): void {
-    this.store.dispatch(new NgxsLoadProducts());
+    this.productsAkitaService.loadProducts();
   }
-
 }
